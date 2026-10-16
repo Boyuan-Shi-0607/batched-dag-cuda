@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -N bdg-validate
+#PBS -l select=1:ncpus=4:mem=8gb:ngpus=1
+#PBS -l walltime=00:08:00
+#PBS -j oe
+
+set -euo pipefail
+cd "${PBS_O_WORKDIR:?Submit this script from the project root}"
+
+# Adapt modules and GPU resource names to your cluster. A prebuilt CUDA build
+# must be present. Do not pass credentials or a whole login environment to PBS.
+if [[ -n "${BDG_MODULES:-}" ]]; then
+    read -r -a modules <<< "$BDG_MODULES"
+    module load "${modules[@]}"
+fi
+build_dir="${BDG_BUILD_DIR:-build}"
+nvidia-smi --query-gpu=name,driver_version --format=csv
+"$build_dir/bdg_tests"
+"$build_dir/bdg_cuda_tests" --require-device
+"$build_dir/bdg_evaluate" data/cos_su2_n2.dag
+for tool in memcheck racecheck synccheck; do
+    compute-sanitizer --tool "$tool" --error-exitcode 1 \
+        "$build_dir/bdg_cuda_tests" --require-device --quick
+done

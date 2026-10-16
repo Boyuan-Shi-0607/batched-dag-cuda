@@ -1,0 +1,7 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+if(@BDG_HAS_CUDA@)
+    find_dependency(CUDAToolkit 12.0)
+endif()
+include("${CMAKE_CURRENT_LIST_DIR}/bdgTargets.cmake")
+check_required_components(bdg)

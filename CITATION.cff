@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite this repository and identify the version or commit used."
+type: software
+title: batched-dag-cuda
+version: 0.1.0
+authors:
+  - family-names: Shi
+    given-names: Boyuan
+license: MIT
+repository-code: "https://github.com/Boyuan-Shi-0607/batched-dag-cuda"
+abstract: "C++ and CUDA implementations for batched evaluation of fixed weighted layered DAGs."

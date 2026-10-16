@@ -1,0 +1,12 @@
+# Output rows: (29,-185) and (1,-19).
+BDAG_BATCH 1
+batch 2
+weights 4
+sources 2
+values
+3 5 7 11
+1 2 3 4
+roots
+1 2
+-1 1
+end

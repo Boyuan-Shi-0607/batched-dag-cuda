@@ -1,0 +1,9 @@
+backend,batch,upload_evaluate_download_ms
+legacy,1,1.2676392
+edge,1,1.2151512
+shared,1,1.2662614
+gather,1,0.9317466
+shared384,1,0.9974462
+shared-g1,1,0.9997734
+shared-g8,1,0.9974722
+shared-g16,1,0.9855706
